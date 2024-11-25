@@ -37,4 +37,8 @@ export class AccueilComponent {
     //on supprime l'ancienne image
     this.listeCategories[indexCategorie].images.splice(indexImage, 1)
   }
+
+  onSuppression(indexCategorie: number, indexImage: number) {
+    this.listeCategories[indexCategorie].images.splice(indexImage, 1)
+  }
 }

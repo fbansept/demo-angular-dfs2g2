@@ -14,6 +14,7 @@
     <div class="images">
       @for (image of categorie.images; let indexImage = $index ;track indexImage) {
       <div class="image">
+        <div class="bouton bouton-supprimer" (click)="onSuppression(indexCategorie, indexImage)">x</div>
         @if(indexCategorie != 0) {
         <div class="bouton bouton-plus" (click)="onDeplacement(indexCategorie, indexImage, false)">+</div>
         }
