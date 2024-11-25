@@ -34,4 +34,37 @@
   &:nth-child(6) .en-tete {
     background-color: #d000ff;
   }
+
+  .images {
+    display: flex;
+
+    .image {
+      position: relative;
+
+      .bouton {
+        position: absolute;
+        border-radius: 50%;
+        background-color: #1900ff;
+        color: white;
+        right: 5px;
+        width: 20px;
+        height: 20px;
+        text-align: center;
+
+        &.bouton-plus {
+          top: 5px;
+        }
+
+        &.bouton-moins {
+          bottom: 5px;
+        }
+      }
+
+      img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+      }
+    }
+  }
 }
