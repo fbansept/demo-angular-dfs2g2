@@ -11,21 +11,35 @@ export class AccueilComponent {
 
   saisieImage = "";
 
-  listeCategories = [
-    {
-      titre: "Super", images: [
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoUbGxdooqKHGls6i0vJT0yXIIHN-PJtllBw&s",
-      ]
-    },
-    { titre: "Bien", images: [] },
-    { titre: "Moyen", images: ["https://assets.evcdn.net/dam-images/83712/16-9/750x422.jpeg"] },
-    { titre: "Bof", images: ["https://assets.evcdn.net/dam-images/83712/16-9/750x422.jpeg"] }]
+  listeCategories: { titre: string, images: string[] }[] = []
 
+  ngOnInit() {
+    const jsonListeCategories = localStorage.getItem("sauvegarde")
+
+    if (jsonListeCategories == null) {
+      this.listeCategories = [
+        { titre: "Super", images: [] },
+        { titre: "Bien", images: [] },
+        { titre: "Moyen", images: [] },
+        { titre: "Bof", images: [] }]
+
+      this.sauvegarder()
+    } else {
+
+      this.listeCategories = JSON.parse(jsonListeCategories)
+
+    }
+  }
+
+  sauvegarder() {
+    localStorage.setItem('sauvegarde', JSON.stringify(this.listeCategories))
+  }
 
   ajoutImage() {
     if (this.saisieImage != "") {
       this.listeCategories[0].images.push(this.saisieImage)
       this.saisieImage = "";
+      this.sauvegarder()
     }
   }
 
@@ -36,9 +50,11 @@ export class AccueilComponent {
     this.listeCategories[indexCategorie + (plus ? 1 : -1)].images.push(imageAdeplacer)
     //on supprime l'ancienne image
     this.listeCategories[indexCategorie].images.splice(indexImage, 1)
+    this.sauvegarder()
   }
 
   onSuppression(indexCategorie: number, indexImage: number) {
     this.listeCategories[indexCategorie].images.splice(indexImage, 1)
+    this.sauvegarder()
   }
 }
