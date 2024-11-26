@@ -22,6 +22,21 @@ export class AccueilComponent {
 
   ngOnInit() {
 
+    //récupérer les catégorie de la personne
+
+    const jwt = localStorage.getItem("jwt");
+
+    //si la personne est connectée
+    if(jwt) {
+      this.http.get(
+        "http://localhost:3000/categories", 
+        {headers: {Authorization: jwt}}
+      )
+        .subscribe(listeCategories => console.log(listeCategories))
+    }
+
+
+
     const jsonListeCategories = localStorage.getItem("sauvegarde")
 
     if (jsonListeCategories == null) {
