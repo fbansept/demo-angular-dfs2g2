@@ -22,9 +22,6 @@ export class AccueilComponent {
 
   ngOnInit() {
 
-    
-
-
     const jsonListeCategories = localStorage.getItem("sauvegarde")
 
     if (jsonListeCategories == null) {
@@ -37,9 +34,7 @@ export class AccueilComponent {
         })
 
     } else {
-
       this.listeCategories = JSON.parse(jsonListeCategories)
-
     }
   }
 

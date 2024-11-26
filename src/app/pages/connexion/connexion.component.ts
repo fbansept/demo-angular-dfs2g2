@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -17,6 +18,7 @@ import { MatInputModule } from '@angular/material/input';
 export class ConnexionComponent {
 
   formBuilder = inject(FormBuilder)
+  http = inject(HttpClient)
 
   formulaire = this.formBuilder.group(
     {
@@ -29,7 +31,12 @@ export class ConnexionComponent {
 
     if (this.formulaire.valid) {
 
-      console.log(this.formulaire.value)
+      this.http.post(
+        "http://localhost:3000/connexion",
+        this.formulaire.value
+      )
+      .subscribe(reponse => console.log(reponse))
+      
 
     }
 
