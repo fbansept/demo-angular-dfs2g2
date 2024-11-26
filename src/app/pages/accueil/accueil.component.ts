@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 export class AccueilComponent {
 
   saisieImage = "";
+  saisieCategorie = "";
 
   listeCategories: { titre: string, images: string[] }[] = []
 
@@ -56,5 +57,18 @@ export class AccueilComponent {
   onSuppression(indexCategorie: number, indexImage: number) {
     this.listeCategories[indexCategorie].images.splice(indexImage, 1)
     this.sauvegarder()
+  }
+
+  ajoutCategorie() {
+    if (this.saisieCategorie != "") {
+
+      this.listeCategories.push({ titre: this.saisieCategorie, images: [] })
+      this.saisieCategorie = ""
+      this.sauvegarder()
+    }
+  }
+
+  suppressionCategorie(indexCategorie: number) {
+    this.listeCategories.splice(indexCategorie, 1)
   }
 }

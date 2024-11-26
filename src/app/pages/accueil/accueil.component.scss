@@ -9,6 +9,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+
+    &.bouton-supprimer {
+      top: 5px;
+      left: 5px;
+      background-color: red;
+    }
   }
 
   &:nth-child(1) .en-tete {
@@ -41,36 +48,36 @@
     .image {
       position: relative;
 
-      .bouton {
-        position: absolute;
-        border-radius: 50%;
-        background-color: #1900ff;
-        color: white;
-        right: 5px;
-        width: 20px;
-        height: 20px;
-        text-align: center;
-
-        &.bouton-plus {
-          top: 5px;
-        }
-
-        &.bouton-moins {
-          bottom: 5px;
-        }
-
-        &.bouton-supprimer {
-          top: 5px;
-          left: 5px;
-          background-color: red;
-        }
-      }
-
       img {
         width: 100px;
         height: 100px;
         object-fit: cover;
       }
+    }
+  }
+
+  .bouton {
+    position: absolute;
+    border-radius: 50%;
+    background-color: #1900ff;
+    color: white;
+    right: 5px;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+
+    &.bouton-plus {
+      top: 5px;
+    }
+
+    &.bouton-moins {
+      bottom: 5px;
+    }
+
+    &.bouton-supprimer {
+      top: 5px;
+      left: 5px;
+      background-color: red;
     }
   }
 }

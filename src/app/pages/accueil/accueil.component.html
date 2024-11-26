@@ -3,8 +3,8 @@
   Ajouter image
 </div>
 
-<input type="text">
-<div class="btn btn-primary">
+<input type="text" [(ngModel)]="saisieCategorie">
+<div class="btn btn-primary" (click)="ajoutCategorie()">
   Ajouter catégorie
 </div>
 
@@ -14,6 +14,7 @@
 
   <div class="categorie">
     <div class="en-tete">
+      <div class="bouton bouton-supprimer" (click)="suppressionCategorie(indexCategorie)">x</div>
       <span>{{categorie.titre}}</span>
     </div>
     <div class="images">
