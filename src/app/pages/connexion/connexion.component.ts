@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, inject } from '@angular/core';
+import { Component, inject, resource } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -31,12 +31,15 @@ export class ConnexionComponent {
 
     if (this.formulaire.valid) {
 
-      this.http.post(
+      this.http.post<{jwt: string}>(
         "http://localhost:3000/connexion",
         this.formulaire.value
       )
-      .subscribe(reponse => console.log(reponse))
-      
+        .subscribe({
+          next: resultat => localStorage.setItem("jwt",resultat.jwt),
+          error: erreur => alert("Identifiant incorrect")
+        })
+
 
     }
 
