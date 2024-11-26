@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
+
+import { HttpClient } from '@angular/common/http';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+
+declare type Categorie = { titre: string, images: string[] }
 
 @Component({
   selector: 'app-accueil',
@@ -12,19 +16,26 @@ export class AccueilComponent {
   saisieImage = "";
   saisieCategorie = "";
 
-  listeCategories: { titre: string, images: string[] }[] = []
+  listeCategories: Categorie[] = []
+
+  http = inject(HttpClient)
 
   ngOnInit() {
+
+    
+
+
     const jsonListeCategories = localStorage.getItem("sauvegarde")
 
     if (jsonListeCategories == null) {
-      this.listeCategories = [
-        { titre: "Super", images: [] },
-        { titre: "Bien", images: [] },
-        { titre: "Moyen", images: [] },
-        { titre: "Bof", images: [] }]
+      
+      this.http
+        .get<Categorie[]>("http://localhost:3000/categories")
+        .subscribe((categoriesServeur) => {
+          this.listeCategories = categoriesServeur
+          this.sauvegarder()
+        })
 
-      this.sauvegarder()
     } else {
 
       this.listeCategories = JSON.parse(jsonListeCategories)
